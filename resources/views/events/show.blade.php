@@ -21,6 +21,7 @@
                     <p><strong>🏠 Número:</strong> {{ $event->number }}</p>
                     <p><strong>➕ Complemento:</strong> {{ $event->complement ?? 'N/A' }}</p>
                     <p><strong>🗓 Data:</strong> {{ \Carbon\Carbon::parse($event->date)->format('d/m/Y H:i') }}</p>
+                    <p><strong>👤 Criado por:</strong> {{ $event->creator->name ?? 'Desconhecido' }}</p>
                 </div>
 
                 <div class="card-footer text-end">

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
     public function index(){
-        $events = Event::all();
+        $events = Event::with('creator')->get();
         return view('events.index', compact('events'));
     }
 
@@ -35,6 +35,7 @@ class EventController extends Controller
     }
 
     public function show(Event $event) {
+        $event->load('creator'); // para garantir que o relacionamento está carregado
         return view('events.show', compact('event'));
     }
 

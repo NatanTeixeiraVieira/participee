@@ -23,6 +23,9 @@
                                 <p class="card-text text-muted mb-1">
                                     <strong>🗓 Data:</strong> {{ \Carbon\Carbon::parse($event->date)->format('d/m/Y H:i') }}
                                 </p>
+                                <p class="card-text text-muted mb-1">
+                                    <strong>👤 Criado por:</strong> {{ $event->creator->name }}
+                                </p>
                                 <p class="card-text">
                                     {{ \Illuminate\Support\Str::limit($event->description, 100) }}
                                 </p>
