@@ -55,17 +55,28 @@ class EventController extends Controller
     }
 
     public function update(Request $request, Event $event) {
-       $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'state' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'neighborhood' => 'required|string|max:255',
-            'zipcode' => 'required|string|max:20',
-            'number' => 'required|string|max:20',
-            'complement' => 'nullable|string|max:255',
-            'date' => 'required|date',
+      $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'state' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'neighborhood' => 'required|string|max:255',
+        'zipcode' => 'required|string|max:20',
+        'number' => 'required|string|max:20',
+        'complement' => 'nullable|string|max:255',
+        'date' => 'required|date',
+        ], [
+            'name.required' => 'O campo nome é obrigatório.',
+            'description.required' => 'A descrição é obrigatória.',
+            'state.required' => 'O Estado é obrigatório.',
+            'city.required' => 'A cidade é obrigatória.',
+            'neighborhood.required' => 'O bairro é obrigatório.',
+            'zipcode.required' => 'O CEP é obrigatório.',
+            'number.required' => 'O número é obrigatório.',
+            'date.required' => 'A data do evento é obrigatória.',
+            'date.date' => 'A data deve estar em um formato válido.',
         ]);
+
 
         $event->update($validated);
         return redirect()->route('events.index')->with('success', 'Event atualizada!');

@@ -18,10 +18,12 @@
                         type="text"
                         name="name"
                         id="name"
-                        class="form-control"
-                        value="{{ $event->name }}"
-                        required
+                        class="form-control @error('name') is-invalid @enderror"
+                        value="{{ old('name', $event->name) }}"
                     />
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -30,10 +32,12 @@
                         type="text"
                         name="description"
                         id="description"
-                        class="form-control"
-                        value="{{ $event->description }}"
-                        required
+                        class="form-control @error('description') is-invalid @enderror"
+                        value="{{ old('description', $event->description) }}"
                     />
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -42,10 +46,12 @@
                         type="text"
                         name="state"
                         id="state"
-                        class="form-control"
-                        value="{{ $event->state }}"
-                        required
+                        class="form-control @error('state') is-invalid @enderror"
+                        value="{{ old('state', $event->state) }}"
                     />
+                    @error('state')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -54,10 +60,12 @@
                         type="text"
                         name="city"
                         id="city"
-                        class="form-control"
-                        value="{{ $event->city }}"
-                        required
+                        class="form-control @error('city') is-invalid @enderror"
+                        value="{{ old('city', $event->city) }}"
                     />
+                    @error('city')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -66,10 +74,12 @@
                         type="text"
                         name="neighborhood"
                         id="neighborhood"
-                        class="form-control"
-                        value="{{ $event->neighborhood }}"
-                        required
+                        class="form-control @error('neighborhood') is-invalid @enderror"
+                        value="{{ old('neighborhood', $event->neighborhood) }}"
                     />
+                    @error('neighborhood')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -78,22 +88,26 @@
                         type="text"
                         name="zipcode"
                         id="zipcode"
-                        class="form-control"
-                        value="{{ $event->zipcode }}"
-                        required
+                        class="form-control @error('zipcode') is-invalid @enderror"
+                        value="{{ old('zipcode', $event->zipcode) }}"
                     />
+                    @error('zipcode')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="number" class="form-label">Número:</label>
                     <input
-                        type="number"
+                        type="text"
                         name="number"
                         id="number"
-                        class="form-control"
-                        value="{{ $event->number }}"
-                        required
+                        class="form-control @error('number') is-invalid @enderror"
+                        value="{{ old('number', $event->number) }}"
                     />
+                    @error('number')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -102,9 +116,12 @@
                         type="text"
                         name="complement"
                         id="complement"
-                        class="form-control"
-                        value="{{ $event->complement }}"
+                        class="form-control @error('complement') is-invalid @enderror"
+                        value="{{ old('complement', $event->complement) }}"
                     />
+                    @error('complement')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -113,10 +130,12 @@
                         type="datetime-local"
                         name="date"
                         id="date"
-                        class="form-control"
-                        value="{{ $event->date }}"
-                        required
+                        class="form-control @error('date') is-invalid @enderror"
+                        value="{{ old('date', \Carbon\Carbon::parse($event->date)->format('Y-m-d\TH:i')) }}"
                     />
+                    @error('date')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="card-footer d-flex justify-content-end gap-2 px-0 border-0">
