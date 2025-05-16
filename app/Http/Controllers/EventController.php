@@ -16,23 +16,34 @@ class EventController extends Controller
         return view('events.create');
     }
 
-    public function store(Request $request) {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'state' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'neighborhood' => 'required|string|max:255',
-            'zipcode' => 'required|string|max:20',
-            'number' => 'required|string|max:20',
-            'complement' => 'nullable|string|max:255',
-            'date' => 'required|date',
-        ]);
+  public function store(Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'state' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'neighborhood' => 'required|string|max:255',
+        'zipcode' => 'required|string|max:20',
+        'number' => 'required|string|max:20',
+        'complement' => 'nullable|string|max:255',
+        'date' => 'required|date',
+    ], [
+        'name.required' => 'O campo nome é obrigatório.',
+        'description.required' => 'A descrição é obrigatória.',
+        'state.required' => 'O Estado é obrigatório.',
+        'city.required' => 'A cidade é obrigatória.',
+        'neighborhood.required' => 'O bairro é obrigatório.',
+        'zipcode.required' => 'O CEP é obrigatório.',
+        'number.required' => 'O número é obrigatório.',
+        'date.required' => 'A data do evento é obrigatória.',
+        'date.date' => 'A data deve estar em um formato válido.',
+    ]);
 
-        $validated['created_by'] = 1;
-        Event::create($validated);
-        return redirect()->route('events.index')->with('success', 'Event criada com sucesso!');
-    }
+    $validated['created_by'] = 1;
+    Event::create($validated);
+
+    return redirect()->route('events.index')->with('success', 'Evento criado com sucesso!');
+}
 
     public function show(Event $event) {
         $event->load('creator'); // para garantir que o relacionamento está carregado
