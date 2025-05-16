@@ -36,6 +36,7 @@
 
                 <div class="card-footer d-flex justify-content-end gap-2 px-0 border-0">
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <a href="{{ route('login') }}" class="btn btn-link">Já tem conta? Entrar</a>
                 </div>
             </form>
         </div>
