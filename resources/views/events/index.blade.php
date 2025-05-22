@@ -27,9 +27,24 @@
                                 </p>
                             </div>
                             <div class="card-footer d-flex justify-content-end gap-3">
-                                <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-success" style="width:80px">
-                                    Participar
-                                </a>
+                                   @if(!$event->participants->contains(auth()->user()->id))
+                                {{-- Botão para participar --}}
+                                <form action="{{ route('events.join', $event->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">
+                                        Participar
+                                    </button>
+                                </form>
+                            @else
+                                {{-- Botão para sair --}}
+                                <form action="{{ route('events.leave', $event->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" style="width: 80px">
+                                        Sair
+                                    </button>
+                                </form>
+                            @endif
                                 <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-primary" style="width:80px">
                                     Ver
                                 </a>

@@ -56,9 +56,49 @@ class EventController extends Controller
         return view('events.my-events', compact('events'));
     }
 
+    public function participingEvents() {
+        $events = auth()->user()->events;
+        return view('events.participing-events', compact('events'));
+    }
+
     public function edit(Event $event) {
         return view('events.edit', compact('event'));
     }
+
+    public function join(Event $event) {
+        $user = auth()->user();
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Você precisa estar logado para participar de um evento.');
+        }
+
+        // Verifica se já está participando
+        if ($event->participants()->where('user_id', $user->id)->exists()) {
+            return redirect()->back()->with('info', 'Você já está participando deste evento.');
+        }
+
+        // Faz o vínculo
+        $event->participants()->attach($user->id);
+
+        return redirect()->back()->with('success', 'Você agora está participando deste evento!');
+    }
+
+    public function leave(Event $event) {
+        $user = auth()->user();
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Você precisa estar logado para sair de um evento.');
+        }
+
+        if (!$event->participants()->where('user_id', $user->id)->exists()) {
+            return redirect()->back()->with('info', 'Você não está participando deste evento.');
+        }
+
+        $event->participants()->detach($user->id);
+
+        return redirect()->back()->with('success', 'Você saiu deste evento.');
+    }
+
 
     public function update(Request $request, Event $event) {
         if ($event->created_by !== auth()->id()) {

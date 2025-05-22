@@ -25,4 +25,8 @@ class Event extends Model
         'date',
         'created_by'
     ];
+
+    public function participants() {
+        return $this->belongsToMany(User::class, 'event_user')->withTimestamps();
+    }
 }

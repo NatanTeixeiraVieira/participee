@@ -12,41 +12,44 @@
         {{-- Header --}}
         <header class="bg-dark text-white py-3 mb-4 shadow-sm">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="{{ route('events.index') }}">Gerenciador de Eventos</a>
+                <div class="container">
+                    <a class="navbar-brand" href="{{ route('events.index') }}">Gerenciador de Eventos</a>
 
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto flex gap-4 items-center">
-                @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('myEvents') }}">Meus Eventos</a>
-                    </li>
-                     <li class="flex items-center">
-                        <a href="{{ route('events.index') }}" class="text-white text-decoration-none me-3">Eventos</a>
-                    </li>
-                    <li class="flex items-center">
-                        <a href="{{ route('events.create') }}" class="text-white text-decoration-none">Criar Evento</a>
-                    </li>
-                    <li class="nav-item">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="btn btn-outline-light btn-sm" type="submit">
-                                🔒 Logout
-                            </button>
-                        </form>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Registrar</a>
-                    </li>
-                @endauth
-            </ul>
-        </div>
-    </div>
-</nav>
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav ms-auto flex gap-4 items-center">
+                            @auth
+                                <li>
+                                    <a class="nav-link text-white text-decoration-none" href="{{ route('participingEvents') }}">Eventos que participo</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-white text-decoration-none" href="{{ route('myEvents') }}">Meus Eventos</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('events.index') }}" class="nav-link text-white text-decoration-none">Eventos</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('events.create') }}" class="nav-link text-white text-decoration-none">Criar Evento</a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-outline-light btn-sm" type="submit">
+                                            🔒 Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            @else
+                                <li>
+                                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="{{ route('register') }}">Registrar</a>
+                                </li>
+                            @endauth
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <!-- <div class="container d-flex justify-content-between align-items-center">
                 <h1 class="h4 mb-0">🎟️ Sistema de Eventos</h1>
                 <nav>
@@ -64,7 +67,7 @@
         {{-- Footer --}}
         <footer class="bg-light text-center py-3 border-top">
             <div class="container">
-                <span class="text-muted">© {{ date('Y') }} Sistema de Eventos. Todos os direitos reservados.</span>
+                <span class="text-muted">© {{ date('Y') }} Participee. Todos os direitos reservados.</span>
             </div>
         </footer>
     </body>
