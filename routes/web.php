@@ -19,4 +19,6 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function() {
     Route::resource('events', EventController::class);
+    Route::get('/my-events', [EventController::class, 'myEvents'])->name('myEvents');
+
 });

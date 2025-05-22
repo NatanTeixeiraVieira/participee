@@ -39,15 +39,21 @@ class EventController extends Controller
         'date.date' => 'A data deve estar em um formato válido.',
     ]);
 
-    $validated['created_by'] = 1;
+    $validated['created_by'] = auth()->id();
     Event::create($validated);
 
     return redirect()->route('events.index')->with('success', 'Evento criado com sucesso!');
 }
 
     public function show(Event $event) {
-        $event->load('creator'); // para garantir que o relacionamento está carregado
+        $event->load('creator');
         return view('events.show', compact('event'));
+    }
+
+    public function myEvents() {
+        $events = Event::where('created_by', auth()->id())->get();
+
+        return view('events.my-events', compact('events'));
     }
 
     public function edit(Event $event) {
@@ -55,6 +61,9 @@ class EventController extends Controller
     }
 
     public function update(Request $request, Event $event) {
+        if ($event->created_by !== auth()->id()) {
+            return redirect()->route('events.index')->with('error', 'Você não tem permissão para editar este evento.');
+        }
       $validated = $request->validate([
         'name' => 'required|string|max:255',
         'description' => 'required|string',
@@ -83,6 +92,9 @@ class EventController extends Controller
     }
 
     public function destroy(Event $event) {
+        if ($event->created_by !== auth()->id()) {
+            return redirect()->route('events.index')->with('error', 'Você não tem permissão para excluir este evento.');
+        }
         $event->delete();
         return redirect()->route('events.index')->with('success', 'Event excluída!');
     }

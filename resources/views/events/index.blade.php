@@ -4,11 +4,7 @@
 
 @section('content')
     <div class="container py-4">
-        <h1 class="mb-4">📅 Lista de Eventos</h1>
-
-        <a href="{{ route('events.create') }}" class="btn btn-success mb-4">
-            ➕ Criar Novo Evento
-        </a>
+        <h1 class="mb-4">Lista de Eventos</h1>
 
         @if($events->count())
             <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -31,10 +27,13 @@
                                 </p>
                             </div>
                             <div class="card-footer d-flex justify-content-end gap-3">
+                                <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-success" style="width:80px">
+                                    Participar
+                                </a>
                                 <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-primary" style="width:80px">
                                     Ver
                                 </a>
-                                <a href="{{ route('events.edit', $event->id) }}" class="btn btn-sm btn-warning text-white" style="width:80px">
+                                <!-- <a href="{{ route('events.edit', $event->id) }}" class="btn btn-sm btn-warning text-white" style="width:80px">
                                     Editar
                                 </a>
                                 <form action="{{ route('events.destroy', $event->id) }}" method="POST">
@@ -43,7 +42,7 @@
                                     <button type="submit" class="btn btn-sm btn-danger" style="width:80px">
                                         Excluir
                                     </button>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                     </div>

@@ -18,6 +18,9 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto flex gap-4 items-center">
                 @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('myEvents') }}">Meus Eventos</a>
+                    </li>
                      <li class="flex items-center">
                         <a href="{{ route('events.index') }}" class="text-white text-decoration-none me-3">Eventos</a>
                     </li>
