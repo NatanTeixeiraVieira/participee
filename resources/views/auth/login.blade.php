@@ -50,17 +50,6 @@
                 @enderror
             </div>
 
-            <div class="mb-3 form-check">
-                <input
-                    type="checkbox"
-                    name="remember"
-                    id="remember"
-                    class="form-check-input"
-                    {{ old('remember') ? 'checked' : '' }}
-                />
-                <label for="remember" class="form-check-label">Lembrar-me</label>
-            </div>
-
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
         </form>
 
