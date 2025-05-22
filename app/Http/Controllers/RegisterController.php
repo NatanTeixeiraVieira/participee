@@ -42,6 +42,6 @@ class RegisterController extends Controller {
         auth()->login($user);
 
         // Redireciona para a home ou dashboard com mensagem de sucesso
-        return redirect()->route('/')->with('success', 'Cadastro realizado com sucesso! Bem-vindo, ' . $user->name);
+        return redirect()->route('home')->with('success', 'Cadastro realizado com sucesso! Bem-vindo, ' . $user->name);
     }
 }
