@@ -7,17 +7,7 @@
     <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px;">
         <h2 class="mb-4 text-center">Entrar na sua conta</h2>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" novalidate>
             @csrf
 
             <div class="mb-3">
@@ -28,7 +18,6 @@
                     id="email"
                     class="form-control @error('email') is-invalid @enderror"
                     value="{{ old('email') }}"
-                    required
                     autofocus
                 />
                 @error('email')
@@ -43,7 +32,6 @@
                     name="password"
                     id="password"
                     class="form-control @error('password') is-invalid @enderror"
-                    required
                 />
                 @error('password')
                     <div class="invalid-feedback">{{ $message }}</div>

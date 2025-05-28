@@ -17,6 +17,10 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'email' => ['required','email'],
             'password' => ['required'],
+        ], [
+            'email.required' => 'O campo email é obrigatório.',
+            'email.email' => 'O email deve ser um endereço de e-mail válido.',
+            'password.required' => 'O campo senha é obrigatório.',
         ]);
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
@@ -25,7 +29,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'As credenciais fornecidas não correspondem aos nossos registros.',
+            'email' => 'Email ou senha inválidos.',
         ])->onlyInput('email');
     }
 
