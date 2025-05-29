@@ -28,13 +28,6 @@
                     </p>
                 </div>
                 <div class="card-footer d-flex justify-content-end gap-2">
-                    <a
-                        href="{{ route('events.show', $event->id) }}"
-                        class="btn btn-sm btn-primary"
-                        style="width: 80px"
-                    >
-                        Ver
-                    </a>
                    <form action="{{ route('events.leave', $event->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
@@ -42,6 +35,13 @@
                             Sair
                         </button>
                     </form>
+                      <a
+                        href="{{ route('events.show', $event->id) }}"
+                        class="btn btn-sm btn-primary"
+                        style="width: 80px"
+                    >
+                        Ver
+                    </a>
                 </div>
             </div>
         </div>

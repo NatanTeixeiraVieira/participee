@@ -12,16 +12,17 @@
                 </div>
 
                 <div class="card-body">
-                    <p><strong>📝 Nome:</strong> {{ $event->name }}</p>
-                    <p><strong>📄 Descrição:</strong> {{ $event->description }}</p>
-                    <p><strong>📍 Estado:</strong> {{ $event->state }}</p>
-                    <p><strong>🏙️ Cidade:</strong> {{ $event->city }}</p>
-                    <p><strong>🏘️ Bairro:</strong> {{ $event->neighborhood }}</p>
-                    <p><strong>📬 CEP:</strong> {{ $event->zipcode }}</p>
-                    <p><strong>🏠 Número:</strong> {{ $event->number }}</p>
-                    <p><strong>➕ Complemento:</strong> {{ $event->complement ?? 'N/A' }}</p>
-                    <p><strong>🗓 Data:</strong> {{ \Carbon\Carbon::parse($event->date)->format('d/m/Y H:i') }}</p>
-                    <p><strong>👤 Criado por:</strong> {{ $event->creator->name ?? 'Desconhecido' }}</p>
+                    <p><strong>Nome:</strong> {{ $event->name }}</p>
+                    <p><strong>Descrição:</strong> {{ $event->description }}</p>
+                    <p><strong>Estado:</strong> {{ $event->state }}</p>
+                    <p><strong>Cidade:</strong> {{ $event->city }}</p>
+                    <p><strong>Bairro:</strong> {{ $event->neighborhood }}</p>
+                    <p><strong>Rua:</strong> {{ $event->street }}</p>
+                    <p><strong>CEP:</strong> {{ $event->zipcode }}</p>
+                    <p><strong>Número:</strong> {{ $event->number }}</p>
+                    <p><strong>Complemento:</strong> {{ $event->complement ?? 'N/A' }}</p>
+                    <p><strong>Data:</strong> {{ \Carbon\Carbon::parse($event->date)->format('d/m/Y H:i') }}</p>
+                    <p><strong>Criado por:</strong> {{ $event->creator->name ?? 'Desconhecido' }}</p>
                 </div>
 
                 <div class="card-footer text-end">

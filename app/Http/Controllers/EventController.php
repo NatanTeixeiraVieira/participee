@@ -27,7 +27,7 @@ class EventController extends Controller
         'zipcode' => 'required|string|max:20',
         'number' => 'required|string|max:20',
         'complement' => 'nullable|string|max:255',
-        'date' => 'required|date',
+        'date' => 'required|date|after:now',
     ], [
         'name.required' => 'O campo nome é obrigatório.',
         'description.required' => 'A descrição é obrigatória.',
@@ -39,6 +39,7 @@ class EventController extends Controller
         'number.required' => 'O número é obrigatório.',
         'date.required' => 'A data do evento é obrigatória.',
         'date.date' => 'A data deve estar em um formato válido.',
+        'date.after' => 'A data deve ser após a data atual.',
     ]);
 
     $validated['created_by'] = auth()->id();
@@ -116,7 +117,7 @@ class EventController extends Controller
         'zipcode' => 'required|string|max:20',
         'number' => 'required|string|max:20',
         'complement' => 'nullable|string|max:255',
-        'date' => 'required|date',
+        'date' => 'required|date|after:now',
         ], [
             'name.required' => 'O campo nome é obrigatório.',
             'description.required' => 'A descrição é obrigatória.',
@@ -128,6 +129,7 @@ class EventController extends Controller
             'number.required' => 'O número é obrigatório.',
             'date.required' => 'A data do evento é obrigatória.',
             'date.date' => 'A data deve estar em um formato válido.',
+            'date.after' => 'A data deve ser após a data atual.',
         ]);
 
 

@@ -8,7 +8,7 @@
 
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <form action="{{ route('events.update', $event->id) }}" method="POST">
+            <form action="{{ route('events.update', $event->id) }}" method="POST" novalidate>
                 @csrf
                 @method('PUT')
 
@@ -98,7 +98,7 @@
 
                 <div class="mb-3">
                     <label for="street" class="form-label">Rua:</label>
-                    <input type="text" name="street" id="street" class="form-control" value="{{ old('street') }}" />
+                    <input type="text" name="street" id="street" class="form-control" value="{{ old('street', $event->street) }}" />
                     @error('street')
                         <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
@@ -140,6 +140,7 @@
                         id="date"
                         class="form-control @error('date') is-invalid @enderror"
                         value="{{ old('date', \Carbon\Carbon::parse($event->date)->format('Y-m-d\TH:i')) }}"
+                        min="{{ now()->format('Y-m-d\TH:i') }}"
                     />
                     @error('date')
                         <div class="invalid-feedback">{{ $message }}</div>

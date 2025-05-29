@@ -8,7 +8,7 @@
 
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <form action="{{ route('events.store') }}" method="POST">
+            <form action="{{ route('events.store') }}" method="POST" novalidate>
                 @csrf
 
                 <div class="mb-3">
@@ -85,7 +85,14 @@
 
                 <div class="mb-3">
                     <label for="date" class="form-label">Data:</label>
-                    <input type="datetime-local" name="date" id="date" class="form-control" value="{{ old('date') }}" min="{{ now()->format('Y-m-d\TH:i') }}" />
+                    <input
+                        type="datetime-local"
+                        name="date"
+                        id="date"
+                        class="form-control"
+                        value="{{ old('date') }}"
+                        min="{{ now()->format('Y-m-d\TH:i') }}"
+                    />
                     @error('date')
                         <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
