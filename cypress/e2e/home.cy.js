@@ -35,10 +35,11 @@ describe('Home Page - Participee', () => {
     });
 
     it('Should navigate to events page when clicking the "Acessar Eventos" button while authenticated', () => {
-        cy.visit('/login');
-        cy.get('input[name="email"]').type('testet@testse.com');
-        cy.get('input[name="password"]').type('12345678');
-        cy.get('button[type="submit"]').click();
+        const random = Math.floor(Math.random() * 100000);
+        const email = `test${random}@example.com`;
+        const password = `Senha123${random}`;
+        cy.register(email, password)
+        cy.login(email, password);
 
         cy.visit('/');
         cy.get('a.btn.btn-primary').click();

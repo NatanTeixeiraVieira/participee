@@ -19,6 +19,7 @@ class Event extends Model
         'state',
         'city',
         'neighborhood',
+        'street',
         'zipcode',
         'number',
         'complement',

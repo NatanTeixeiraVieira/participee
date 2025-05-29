@@ -28,6 +28,14 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="zipcode" class="form-label">CEP:</label>
+                    <input type="text" name="zipcode" id="zipcode" class="form-control" value="{{ old('zipcode') }}" />
+                    @error('zipcode')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="state" class="form-label">Estado:</label>
                     <input type="text" name="state" id="state" class="form-control" value="{{ old('state') }}" />
                     @error('state')
@@ -52,9 +60,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="zipcode" class="form-label">CEP:</label>
-                    <input type="text" name="zipcode" id="zipcode" class="form-control" value="{{ old('zipcode') }}" />
-                    @error('zipcode')
+                    <label for="street" class="form-label">Rua:</label>
+                    <input type="text" name="street" id="street" class="form-control" value="{{ old('street') }}" />
+                    @error('street')
                         <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
                 </div>
@@ -77,7 +85,7 @@
 
                 <div class="mb-3">
                     <label for="date" class="form-label">Data:</label>
-                    <input type="datetime-local" name="date" id="date" class="form-control" value="{{ old('date') }}" />
+                    <input type="datetime-local" name="date" id="date" class="form-control" value="{{ old('date') }}" min="{{ now()->format('Y-m-d\TH:i') }}" />
                     @error('date')
                         <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
@@ -91,4 +99,39 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Máscara para o campo de CEP
+        $('#zipcode').mask('00000-000');
+
+        // Evento ao sair do campo de CEP
+        $('#zipcode').on('blur', function() {
+            const cep = $(this).val().replace(/\D/g, '');
+
+            if (cep.length !== 8) {
+                alert('CEP inválido.');
+                return;
+            }
+
+            // Chamada da API ViaCEP
+            $.getJSON(`https://viacep.com.br/ws/${cep}/json/`, function(data) {
+                if (!("erro" in data)) {
+                    $('#state').val(data.uf);
+                    $('#city').val(data.localidade);
+                    $('#neighborhood').val(data.bairro);
+                    $('#street').val(data.logradouro);
+                    $('#complement').val(data.complemento);
+                } else {
+                    alert('CEP não encontrado.');
+                }
+            }).fail(function() {
+                alert('Erro ao buscar CEP. Tente novamente.');
+            });
+        });
+    });
+</script>
 @endsection

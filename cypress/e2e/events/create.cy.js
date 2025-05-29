@@ -1,7 +1,7 @@
 describe('Create Event Page', () => {
     const random = Math.floor(Math.random() * 100000);
     const email = `test${random}@example.com`;
-const password = `Senha123${random}`;
+    const password = `Senha123${random}`;
 
     before(() => {
         cy.register(email, password);
@@ -18,6 +18,7 @@ const password = `Senha123${random}`;
     cy.get('input[name="state"]').should('exist');
     cy.get('input[name="city"]').should('exist');
     cy.get('input[name="neighborhood"]').should('exist');
+    cy.get('input[name="street"]').should('exist');
     cy.get('input[name="zipcode"]').should('exist');
     cy.get('input[name="number"]').should('exist');
     cy.get('input[name="complement"]').should('exist');
@@ -29,7 +30,7 @@ const password = `Senha123${random}`;
   it('should show validation errors when submitting empty form', () => {
     cy.contains('button', 'Salvar').click();
 
-    cy.get('.text-danger').should('have.length', 8);
+    cy.get('.text-danger').should('have.length', 9);
   });
 
   it('should create a new event successfully', () => {
@@ -41,6 +42,7 @@ const password = `Senha123${random}`;
     cy.get('input[name="state"]').type('SP');
     cy.get('input[name="city"]').type('São Paulo');
     cy.get('input[name="neighborhood"]').type('Centro');
+    cy.get('input[name="street"]').type('Rua teste');
     cy.get('input[name="zipcode"]').type('01001-000');
     cy.get('input[name="number"]').type('100');
     cy.get('input[name="complement"]').type('Apto 10');
