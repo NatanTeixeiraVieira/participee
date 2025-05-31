@@ -19,13 +19,35 @@
                 ] as [$field, $label, $type])
                     <div class="mb-3">
                         <label for="{{ $field }}" class="form-label">{{ $label }}</label>
-                        <input
-                            type="{{ $type }}"
-                            name="{{ $field }}"
-                            id="{{ $field }}"
-                            class="form-control @error($field) is-invalid @enderror"
-                            value="{{ $type !== 'password' ? old($field) : '' }}"
-                        />
+
+                        @if (in_array($field, ['password', 'password_confirmation']))
+                            <div class="position-relative">
+                                <input
+                                    type="password"
+                                    name="{{ $field }}"
+                                    id="{{ $field }}"
+                                    class="form-control @error($field) is-invalid @enderror"
+                                />
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-secondary btn-sm position-absolute"
+                                    style="top: 50%; right: 10px; transform: translateY(-50%);"
+                                    onclick="togglePassword('{{ $field }}')"
+                                    tabindex="-1"
+                                >
+                                    👁️
+                                </button>
+                            </div>
+                        @else
+                            <input
+                                type="{{ $type }}"
+                                name="{{ $field }}"
+                                id="{{ $field }}"
+                                class="form-control @error($field) is-invalid @enderror"
+                                value="{{ old($field) }}"
+                            />
+                        @endif
+
                         @error($field)
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -42,4 +64,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    function togglePassword(fieldId) {
+        const input = document.getElementById(fieldId);
+        if (input.type === 'password') {
+            input.type = 'text';
+        } else {
+            input.type = 'password';
+        }
+    }
+</script>
 @endsection

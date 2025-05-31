@@ -19,13 +19,13 @@
                         <ul class="navbar-nav ms-auto flex gap-4 items-center">
                             @auth
                                 <li>
+                                    <a href="{{ route('events.index') }}" class="nav-link text-white text-decoration-none">Eventos</a>
+                                </li>
+                                <li>
                                     <a class="nav-link text-white text-decoration-none" href="{{ route('participingEvents') }}">Eventos que participo</a>
                                 </li>
                                 <li>
                                     <a class="nav-link text-white text-decoration-none" href="{{ route('myEvents') }}">Meus Eventos</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('events.index') }}" class="nav-link text-white text-decoration-none">Eventos</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('events.create') }}" class="nav-link text-white text-decoration-none">Criar Evento</a>
