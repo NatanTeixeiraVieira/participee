@@ -52,8 +52,6 @@ describe('User Registration Page', () => {
     cy.get('.invalid-feedback').should('contain', 'Este email já está em uso');
   });
 
-
-
   it('should register successfully with valid credentials', () => {
     const random = Math.floor(Math.random() * 100000);
     const email = `test${random}@example.com`;

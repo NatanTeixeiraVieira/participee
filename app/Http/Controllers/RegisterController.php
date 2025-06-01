@@ -7,16 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller {
-    // Exibe o formulário de cadastro
     public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-    // Processa o cadastro do usuário
     public function register(Request $request)
     {
-        // Validação dos dados do formulário
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -31,17 +28,14 @@ class RegisterController extends Controller {
             'password.confirmed' => 'A confirmação da senha não confere.',
         ]);
 
-        // Cria o usuário com a senha criptografada
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        // Autentica o usuário após o cadastro (opcional)
         auth()->login($user);
 
-        // Redireciona para a home ou dashboard com mensagem de sucesso
         return redirect()->route('home')->with('success', 'Cadastro realizado com sucesso! Bem-vindo, ' . $user->name);
     }
 }

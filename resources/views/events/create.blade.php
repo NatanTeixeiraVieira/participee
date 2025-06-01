@@ -112,10 +112,8 @@
 
 <script>
     $(document).ready(function() {
-        // Máscara para o campo de CEP
         $('#zipcode').mask('00000-000');
 
-        // Evento ao sair do campo de CEP
         $('#zipcode').on('blur', function() {
             const cep = $(this).val().replace(/\D/g, '');
 
@@ -124,7 +122,6 @@
                 return;
             }
 
-            // Chamada da API ViaCEP
             $.getJSON(`https://viacep.com.br/ws/${cep}/json/`, function(data) {
                 if (!("erro" in data)) {
                     $('#state').val(data.uf);

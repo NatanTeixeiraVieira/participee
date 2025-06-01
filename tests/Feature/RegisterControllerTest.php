@@ -13,7 +13,7 @@ class RegisterControllerTest extends TestCase
 
     public function test_show_registration_form_displays_correct_view(): void
     {
-        $response = $this->get('/register'); // ajuste a rota conforme seu projeto
+        $response = $this->get('/register');
 
         $response->assertStatus(200);
         $response->assertViewIs('auth.register');
@@ -37,7 +37,6 @@ class RegisterControllerTest extends TestCase
 
     public function test_register_fails_with_invalid_data(): void
     {
-        // Email inválido e senha muito curta
         $response = $this->from('/register')->post('/register', [
             'name' => '',
             'email' => 'invalid-email',
