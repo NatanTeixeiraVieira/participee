@@ -35,6 +35,7 @@ describe('Create Event Page', () => {
 
   it('should create a new event successfully', () => {
     const date = new Date();
+    date.setHours(date.getHours() + 1);
     const formattedDate = date.toISOString().slice(0, 16);
 
     cy.get('input[name="name"]').type('Test Event');

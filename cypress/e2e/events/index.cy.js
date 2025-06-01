@@ -54,6 +54,6 @@ describe('Events List Page', () => {
     cy.url().should('include', '/events/');
     cy.get('div.card-body')
     .find('p')
-    .should('have.length', 10);
+    .should('have.length', 11);
   });
 });
