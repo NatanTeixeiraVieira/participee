@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
     public function index(){
-        $events = Event::with('creator')->get();
+        $events = Event::with('creator')->orderBy('date', 'desc')->get();
         return view('events.index', compact('events'));
     }
 
@@ -54,13 +54,13 @@ class EventController extends Controller
     }
 
     public function myEvents() {
-        $events = Event::where('created_by', auth()->id())->get();
+        $events = Event::where('created_by', auth()->id())->orderBy('date', 'desc')->get();
 
         return view('events.my-events', compact('events'));
     }
 
     public function participingEvents() {
-        $events = auth()->user()->events;
+        $events = auth()->user()->events()->orderBy('date', 'desc')->get();
         return view('events.participing-events', compact('events'));
     }
 
@@ -73,6 +73,10 @@ class EventController extends Controller
 
         if (!$user) {
             return redirect()->route('login')->with('error', 'Você precisa estar logado para participar de um evento.');
+        }
+
+         if ($event->date <= now()) {
+            return redirect()->back()->with('error', 'Não é possível participar de um evento que já ocorreu.');
         }
 
         if ($event->participants()->where('user_id', $user->id)->exists()) {

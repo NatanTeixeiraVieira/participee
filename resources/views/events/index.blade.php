@@ -68,5 +68,11 @@
                 Nenhum evento cadastrado ainda.
             </div>
         @endif
+
+        @if(session('error'))
+            <script>
+                alert(@json(session('error')));
+            </script>
+        @endif
     </div>
 @endsection
