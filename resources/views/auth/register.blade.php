@@ -17,7 +17,7 @@
                     ['password', 'Senha', 'password'],
                     ['password_confirmation', 'Confirmar Senha', 'password']
                 ] as [$field, $label, $type])
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="{{ $field }}" class="form-label">{{ $label }}</label>
 
                         @if (in_array($field, ['password', 'password_confirmation']))
@@ -31,12 +31,17 @@
                                 <button
                                     type="button"
                                     class="btn btn-outline-secondary btn-sm position-absolute"
-                                    style="top: 50%; right: 10px; transform: translateY(-50%);"
+                                    style="top: 50%; right: 32px; transform: translateY(-50%);"
                                     onclick="togglePassword('{{ $field }}')"
                                     tabindex="-1"
                                 >
                                     👁️
                                 </button>
+                                 @error($field)
+                                    <div class="invalid-feedback position-absolute">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         @else
                             <input

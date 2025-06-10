@@ -16,7 +16,7 @@ class LoginController extends Controller
     {
         $credentials = $request->validate([
             'email' => ['required','email'],
-            'password' => ['required'],
+            'password' => ['required', 'max:100'],
         ], [
             'email.required' => 'O campo email é obrigatório.',
             'email.email' => 'O email deve ser um endereço de e-mail válido.',
