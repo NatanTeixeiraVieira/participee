@@ -2,6 +2,7 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8" />
+        <meta title="Participee" />
         <title>@yield('title', 'Minha Aplicação')</title>
         <link
             rel="stylesheet"
